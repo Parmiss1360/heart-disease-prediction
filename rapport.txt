@@ -1,0 +1,12 @@
+Etisk reflektion
+
+
+I praktiken beror resultatet mycket på vilken typ av dataset som används, eftersom modellen tränas på dessa data och kan komma att användas i framtiden.
+
+I detta projekt används ett dataset med information om hjärtsjukdomar, vilket gör det extra viktigt att modellen ger så korrekta förutsägelser som möjligt. Om modellen till exempel inte identifierar en sjuk patient kan det leda till allvarliga hälsorisker.
+
+Samtidigt är det viktigt att förstå att alla maskininlärningsmodeller bygger på sannolikheter och inte är helt exakta. De fungerar ofta enligt principen ”trial and error” och kan därför göra fel.
+
+Därför bör modellen inte användas som ett enda beslutsunderlag. Den slutliga diagnosen ska alltid göras av en läkare.
+
+Modellen kan dock vara ett värdefullt stöd i ett tidigt skede genom att hjälpa till att identifiera riskfaktorer, såsom högt blodtryck, högt kolesterol eller förträngda blodkärl, vilket kan öka sannolikheten för hjärtsjukdom.
