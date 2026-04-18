@@ -99,12 +99,13 @@ from sklearn import metrics
 from sklearn.ensemble import RandomForestClassifier
 data=pd.read_csv('./data/heart.csv')
 
-X=data.drop(columns=['target'])
-Y=data['target']
 
 
 
 dataprocessing = dp.Data_processing()
+data = dataprocessing.delete_duplicates(data)
+X=data.drop(columns=['target'])
+Y=data['target']
 x_train, x_test, y_train, y_test = dataprocessing.split_data(X, Y)
 x_train = dataprocessing.fit_transform(x_train)
 x_test  = dataprocessing.transform(x_test)
@@ -124,10 +125,14 @@ x_test  = dataprocessing.transform(x_test)
 
 rfc = RandomForestClassifier(
     n_estimators=30,
-    max_depth=3,
+    max_depth=5,
     random_state=42
 )
 rfc.fit(x_train,y_train)
 pred=rfc.predict(x_test)
-print(metrics.classification_report(y_test,pred))
-print(metrics.confusion_matrix(y_test,pred))
+pred_train=rfc.predict(x_train)
+print(metrics.accuracy_score(y_test, pred))
+print(metrics.accuracy_score(y_train, pred_train))
+
+# print(metrics.classification_report(y_test,pred))
+# print(metrics.confusion_matrix(y_test,pred))

@@ -68,11 +68,15 @@ class Data_processing:
     def split_data(self, X, y):
         x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
         return x_train, x_test, y_train, y_test
-     
+ 
+ 
+    def delete_duplicates(self, data):
+        return data.drop_duplicates().reset_index(drop=True)    
 # Denna metod kombinerar alla steg i dataförbehandlingen. Först hanterar den outliers i data genom att anropa handle_outliers-metoden med fit=True,
 # sedan lägger den till en extra kolumn 'oldpeak_sqrt' genom att anropa add_extra_sqrt_column-metoden, tränar skalare på data genom att anropa fit_data-metoden,
 # och slutligen transformerar data genom att anropa transform_data-metoden. Den returnerar den fullständigt transformerade data.
     def fit_transform(self, data):
+        
         data = self.handle_outliers(data=data, fit=True)
         data = self.add_extra_sqrt_column(data=data)
         self.fit_data(data)

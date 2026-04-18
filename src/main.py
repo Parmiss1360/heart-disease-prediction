@@ -12,6 +12,7 @@ Y=data['target']
 
 
 dataprocessing = dp.Data_processing()
+data = dataprocessing.delete_duplicates(data)
 x_train, x_test, y_train, y_test = dataprocessing.split_data(X, Y)
 x_train = dataprocessing.fit_transform(x_train)
 x_test  = dataprocessing.transform(x_test)
