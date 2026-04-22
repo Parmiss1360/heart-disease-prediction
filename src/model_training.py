@@ -36,13 +36,19 @@ class model_training:
       print(metrics.classification_report(y_train, pred))
       print(metrics.confusion_matrix(y_train, pred))
     
+    # den här metoden beräknar och skriver ut olika utvärderingsmått för modellen, 
+    # inklusive noggrannhet (accuracy), precision, F1-score och recall.
     def evalute(self, x_test, y_test):
         pred=self.predict(x_test)
         print("accuracy:"+str(metrics.accuracy_score(y_test, pred)))
         print("precision:"+str(metrics.precision_score(y_test, pred)))
         print("f1-score:"+str(metrics.f1_score(y_test, pred)))
         print("recall:"+str(metrics.recall_score(y_test, pred)))
-        
+# den här metoden beräknar och skriver ut olika feature_importance_Forestrandom för modellen
+# med hjälp av attributet feature_importances_ som finns i RandomForestClassifier. 
+# Den skapar en DataFrame som innehåller varje funktions namn och dess motsvarande vikt, '
+# sorterar den efter vikt i fallande ordning och returnerar den. 
+# Detta kan hjälpa till att identifiera vilka funktioner som är mest betydelsefulla för modellens prediktioner.
     def feature_importance_Forestrandom(self,X):
            
             importances = self.model.feature_importances_
