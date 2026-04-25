@@ -97,6 +97,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn import metrics
 from sklearn.ensemble import RandomForestClassifier
+
+import xgboost as xgb
+
 data=pd.read_csv('./data/heart.csv')
 
 
@@ -110,29 +113,3 @@ x_train, x_test, y_train, y_test = dataprocessing.split_data(X, Y)
 x_train = dataprocessing.fit_transform(x_train)
 x_test  = dataprocessing.transform(x_test)
 
-# print("Train:Balancded")
-# print(y_train.value_counts(normalize=True))
-
-# print("Test:Balanced")
-# print(y_test.value_counts(normalize=True))    
-
-# logreg=LogisticRegression()
-# logreg.fit(x_train,y_train)
-# pred=logreg.predict(x_test)
-# print(metrics.classification_report(y_test,pred))
-# print(metrics.confusion_matrix(y_test,pred))
-
-
-rfc = RandomForestClassifier(
-    n_estimators=30,
-    max_depth=5,
-    random_state=42
-)
-rfc.fit(x_train,y_train)
-pred=rfc.predict(x_test)
-pred_train=rfc.predict(x_train)
-print(metrics.accuracy_score(y_test, pred))
-print(metrics.accuracy_score(y_train, pred_train))
-
-# print(metrics.classification_report(y_test,pred))
-# print(metrics.confusion_matrix(y_test,pred))

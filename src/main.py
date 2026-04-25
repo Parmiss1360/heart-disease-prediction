@@ -20,9 +20,9 @@ x_train = dataprocessing.fit_transform(x_train)
 x_test  = dataprocessing.transform(x_test)
 
 
-modelraining= mt.model_training()
-modelraining.train_model_RandomForest(x_train, y_train)
-modelraining.evalute(x_test, y_test)
-print(metrics.f1_score(y_train, modelraining.predict(x_train)))
-print(modelraining.feature_importance_Forestrandom(x_train))
+modeltraining= mt.model_training()
+modeltraining.train_model_RandomForest(x_train, y_train)
+modeltraining.evaluate(x_test, y_test)
+print(metrics.f1_score(y_train, modeltraining.predict(x_train)))
+print(modeltraining.feature_importance_Forestrandom(x_train))
 
