@@ -97,7 +97,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn import metrics
 from sklearn.ensemble import RandomForestClassifier
-
+import model_training as mt
 import xgboost as xgb
 
 data=pd.read_csv('./data/heart.csv')
@@ -110,6 +110,48 @@ data = dataprocessing.delete_duplicates(data)
 X=data.drop(columns=['target'])
 Y=data['target']
 x_train, x_test, y_train, y_test = dataprocessing.split_data(X, Y)
-x_train = dataprocessing.fit_transform(x_train)
-x_test  = dataprocessing.transform(x_test)
 
+
+
+xgboost_model = xgb.XGBClassifier(learning_rate=0.2,
+                                  subsample=1.0
+                                  , max_depth=5 ,n_estimators=100 ,
+                                  )
+#xgboost_model.fit(x_train, y_train)
+#y_pred = xgboost_model.predict(x_test)
+
+#acoucry =float(sum(y_pred == y_test)) /len(y_test)
+#print("Accuracy:", acoucry) 
+
+# xgb.plot_importance(xgboost_model)
+# plt.show()
+
+xgb_dmatrix = xgb.DMatrix(X, label=Y)
+parms = {"objective":"binary:logistic", 
+         "max_depth":5}
+
+# xgb_cv=xgb.cv(dtrain=xgb_dmatrix, params=parms, 
+#               nfold=3, num_boost_round=10,
+#               early_stopping_rounds=10, metrics="error", as_pandas=True, seed=42)
+
+# print(xgb_cv)
+
+# acoucry=1-xgb_cv["test-error-mean"].min()
+# print("Accuracy:", acoucry)
+from sklearn.model_selection import GridSearchCV
+params = {
+    'n_estimators': [100, 200],
+    'max_depth': [3, 5, 7],
+    'learning_rate': [0.01, 0.1, 0.2],
+    'subsample': [0.8, 1.0]
+}
+
+
+grid_search = GridSearchCV(
+    estimator=xgboost_model,
+    param_grid=params,
+    cv=5,
+    scoring='accuracy'
+)
+
+grid_search.fit(x_train, y_train)

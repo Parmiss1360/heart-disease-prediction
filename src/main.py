@@ -18,11 +18,22 @@ Y = data['target']
 x_train, x_test, y_train, y_test = dataprocessing.split_data(X, Y)
 x_train = dataprocessing.fit_transform(x_train)
 x_test  = dataprocessing.transform(x_test)
+model_tarining = mt.model_training()
+results = []
 
+model_tarining.train_model_XGBoost(x_train, y_train)
+r = model_tarining.evalute(x_test, y_test)
+r["model"] = "XGBoost"
+results.append(r)
 
-modeltraining= mt.model_training()
-modeltraining.train_model_RandomForest(x_train, y_train)
-modeltraining.evaluate(x_test, y_test)
-print(metrics.f1_score(y_train, modeltraining.predict(x_train)))
-print(modeltraining.feature_importance_Forestrandom(x_train))
+model_tarining.train_model_LogisticRegression(x_train, y_train)
+r = model_tarining.evalute(x_test, y_test)
+r["model"] = "LogisticRegression"
+results.append(r)
 
+model_tarining.train_model_RandomForest(x_train, y_train)
+r = model_tarining.evalute(x_test, y_test)
+r["model"] = "RandomForest"
+results.append(r)
+
+#print(pd.DataFrame(results))

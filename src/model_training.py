@@ -2,6 +2,8 @@ import pandas  as pd
 from sklearn import metrics
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
+
+import xgboost as xgb
 class model_training:
     
     def __init__(self):
@@ -11,8 +13,18 @@ class model_training:
         self.model = RandomForestClassifier(n_estimators=100, random_state=42 , max_depth=5
                                             )
         self.model.fit(x_train, y_train)
-        
-        
+    
+    
+    #I denna metod tränas en XGBoost-modell på träningsdata (x_train och y_train)
+    # med specifika hyperparametrar, inklusive n_estimators (antalet träd i modellen), random_state (för att säkerställa reproducerbarhet) och max_depth (maximalt djup på varje träd)
+    # Efter träningen kan modellen användas för att göra förutsägelser på testdata eller annan data.
+    # (för reproducerbarhet) och max_depth (maximalt djup på varje träd). Efter träningen kan modellen användas för att göra förutsägelser på testdata eller annan data.  
+    def train_model_XGBoost(self, x_train, y_train):
+        self.model = xgb.XGBClassifier(
+                                      random_state=123
+                                     , max_depth=5, subsample=1.0, learning_rate=0.2,gamma=0.6)
+        self.model.fit(x_train, y_train)
+          
     def train_model_LogisticRegression(self, x_train, y_train):
         self.model = LogisticRegression()
         self.model.fit(x_train, y_train)  
@@ -40,10 +52,12 @@ class model_training:
     # inklusive noggrannhet (accuracy), precision, F1-score och recall.
     def evalute(self, x_test, y_test):
         pred=self.predict(x_test)
-        print("accuracy:"+str(metrics.accuracy_score(y_test, pred)))
-        print("precision:"+str(metrics.precision_score(y_test, pred)))
-        print("f1-score:"+str(metrics.f1_score(y_test, pred)))
-        print("recall:"+str(metrics.recall_score(y_test, pred)))
+        return {
+        "accuracy": metrics.accuracy_score(y_test, pred),
+        "precision": metrics.precision_score(y_test, pred),
+        "f1": metrics.f1_score(y_test, pred),
+        "recall": metrics.recall_score(y_test, pred)
+    }
 # den här metoden beräknar och skriver ut olika feature_importance_Forestrandom för modellen
 # med hjälp av attributet feature_importances_ som finns i RandomForestClassifier. 
 # Den skapar en DataFrame som innehåller varje funktions namn och dess motsvarande vikt, '
