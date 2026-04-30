@@ -22,7 +22,7 @@ class model_training:
     def train_model_XGBoost(self, x_train, y_train):
         self.model = xgb.XGBClassifier(
                                       random_state=123
-                                     , max_depth=5, subsample=1.0, learning_rate=0.2,gamma=0.6)
+                                     , max_depth=5, subsample=1.0, learning_rate=0.2,gamma=0.7)
         self.model.fit(x_train, y_train)
           
     def train_model_LogisticRegression(self, x_train, y_train):

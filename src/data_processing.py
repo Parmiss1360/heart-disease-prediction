@@ -11,7 +11,7 @@ class Data_processing:
         self.robust_scaler = RobustScaler()
         self.lower_bound = None
         self.upper_bound = None
-        
+    
         
     # Denna metod lägger till en ny kolumn 'oldpeak_sqrt' som är kvadratroten av 'oldpeak' 
     #vilket kan hjälpa till att normalisera fördelningen av 'oldpeak' och minska effekten av outliers.
