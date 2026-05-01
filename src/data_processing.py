@@ -15,6 +15,15 @@ class Data_processing:
         
     # Denna metod lägger till en ny kolumn 'oldpeak_sqrt' som är kvadratroten av 'oldpeak' 
     #vilket kan hjälpa till att normalisera fördelningen av 'oldpeak' och minska effekten av outliers.
+    
+    def replace_missing_values(self, data):
+        val_mode = data['thal'].mode()[0]
+        data['thal'] = data['thal'].replace(3, val_mode)
+        
+        val_mode_ca = data['ca'].mode()[0]
+        data['ca'] = data['ca'].replace(4, val_mode_ca)
+        return data
+    
     def add_extra_sqrt_column(self,data):
         data['oldpeak_sqrt'] = np.sqrt(data['oldpeak'])
         return data

@@ -10,3 +10,14 @@ Samtidigt är det viktigt att förstå att alla maskininlärningsmodeller bygger
 Därför bör modellen inte användas som ett enda beslutsunderlag. Den slutliga diagnosen ska alltid göras av en läkare.
 
 Modellen kan dock vara ett värdefullt stöd i ett tidigt skede genom att hjälpa till att identifiera riskfaktorer, såsom högt blodtryck, högt kolesterol eller förträngda blodkärl, vilket kan öka sannolikheten för hjärtsjukdom.
+
+
+Variabeln "thal" har fyra värden (0–3). Värde 0 betraktas som okänt, medan 1, 2 och 3 motsvarar normal, fixed defect och reversible defect.
+
+Personuppgifter såsom namn och personnummer har tagits bort och ersatts med dummyvärden för att skydda individernas integritet.
+
+| Modell              | Accuracy | Precision | Recall   | F1-score |
+|---------------------|----------|-----------|----------|----------|
+| XGBoost             | 0.786885 | 0.812500  | 0.787879 | 0.800000 |
+| Logistic Regression | 0.819672 | 0.843750  | 0.818182 | 0.830769 |
+| Random Forest       | 0.786885 | 0.794118  | 0.818182 | 0.805970 |
