@@ -1,20 +1,23 @@
 import pickle as pk
 import pandas as pd
 
+import tkinter as tk
+from tkinter import ttk
+
+
 # load processor
-with open("./models/processor.pkl", "rb") as f:
-    processor = pk.load(f)
 
-# load models
-with open("./models/logisticregression_model.pkl", "rb") as f:
-    logistic_model = pk.load(f)
+ 
+window= tk.Tk()
+ 
+window.title("Heart Disease Prediction")
 
-with open("./models/randomforest_model.pkl", "rb") as f:
-    rf_model = pk.load(f)
+window.geometry('800x600')
+window.mainloop()
 
-with open("./models/xgboost_model.pkl", "rb") as f:
-    xgb_model = pk.load(f)
-    
+
+
+
 user_input = {
     "age": 51,
     "sex": 0,
@@ -31,6 +34,19 @@ user_input = {
     "thal":2
 }
 
+
+
+with open("./models/processor.pkl", "rb") as f:
+    processor = pk.load(f)
+# load models
+with open("./models/logisticregression_model.pkl", "rb") as f:
+    logistic_model = pk.load(f)
+
+with open("./models/randomforest_model.pkl", "rb") as f:
+    rf_model = pk.load(f)
+
+with open("./models/xgboost_model.pkl", "rb") as f:
+    xgb_model = pk.load(f)
 df = pd.DataFrame([user_input])
 
 df_processed = processor.transform(df)
